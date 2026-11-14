@@ -14,7 +14,7 @@
 
 ### 2. [KOSPI — 금융 시계열과 허위회귀 진단](https://github.com/jujinho03/kospi-macro-spurious-regression)
 
-높은 R²를 보인 수준 회귀에서 정상성·공적분·잔차를 점검해 해석을 제한했습니다. 팀 과제의 데이터 검증과 시계열 진단을 바탕으로 분석을 개인 재구축했습니다.
+수준 회귀의 학습 R²는 0.8103이었지만 공적분을 뒷받침할 근거가 없어, 장기 관계로 해석하지 않았습니다. 팀 과제의 데이터 검증과 시계열 진단을 바탕으로 분석을 개인 재구축했습니다.
 
 1차 차분 모형은 금융 변수 변화의 **단기 동시점 연관성**으로 해석했습니다. 인과관계나 검증된 투자 예측은 아닙니다. [진단 결과와 분석 보고서](https://github.com/jujinho03/kospi-macro-spurious-regression/blob/ddd4f114fa9fcc9087138b0dbb3f8b20b5ab5cde/docs/findings.md)
 
@@ -28,7 +28,7 @@
 
 BLOCK AI 2026 HTTP 451 팀 프로젝트에서 팀장으로 AI 데이터 분할·누수 점검, R01 평가와 오분류 분석을 담당했습니다.
 
-팀은 사용자가 받은 판정 영수증과 공개 테스트넷의 등록값을 대조하는 프로토타입을 만들었습니다. 이는 AI 판정 자체가 옳음을 증명하지 않습니다. [AI 평가·한계: Model Card](https://github.com/jujinho03/verimod/blob/3e1d97b18ec4d1e0d96d0f951e154d8b3b138c74/docs/model-card.md)
+팀은 판정 영수증 2건을 Base Sepolia 테스트넷에 등록하고, 브라우저에서 등록값과 대조했습니다. [공개 검증 기록](https://github.com/jujinho03/verimod/blob/3e1d97b18ec4d1e0d96d0f951e154d8b3b138c74/docs/handoffs/w4-anchored-epoch-public/20261020-r01/README.md). 이는 AI 판정 자체가 옳음을 증명하지 않습니다. [AI 평가·한계: Model Card](https://github.com/jujinho03/verimod/blob/3e1d97b18ec4d1e0d96d0f951e154d8b3b138c74/docs/model-card.md)
 
 ## 분석 도구
 
