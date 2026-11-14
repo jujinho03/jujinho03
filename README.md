@@ -1,28 +1,35 @@
-# 주진호 | Data Science Portfolio
+# 주진호 | 금융 데이터 분석 · 모델 검증
 
-> 데이터를 먼저 의심하고, 검증 가능한 결과로 정리합니다.
+데이터를 먼저 의심하고, 검증 가능한 결과로 정리합니다.
 
-데이터사이언스를 전공하며 금융·공공데이터의 품질 검수, 데이터 누수 방지, 모델 검증과 결과 해석을 프로젝트로 축적하고 있습니다. 아래 세 저장소는 학부 프로젝트의 문제의식을 유지하면서 실행 구조, 검증 절차와 문서를 개인 포트폴리오로 다시 구축한 결과입니다.
-
-![Python](https://img.shields.io/badge/Python-Data%20Analysis-3776AB?style=flat-square&logo=python&logoColor=white)
-![pandas](https://img.shields.io/badge/pandas-Data%20Processing-150458?style=flat-square&logo=pandas&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-Machine%20Learning-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-Reproducible%20Analysis-F37626?style=flat-square&logo=jupyter&logoColor=white)
+금융 데이터 분석을 목표로 하는 데이터사이언스 전공자로, 신용리스크와 금융 시계열에서 데이터 누수와 모델 해석의 오류를 점검했습니다.
 
 ## 대표 프로젝트
 
-| 순서 | 프로젝트 | 핵심 역량 | 대표 결과 |
-|---:|---|---|---|
-| 1 | [Home Credit 채무불이행 위험 분석](https://github.com/jujinho03/home-credit-default-risk) | 불균형 분류, 누수 방지, 해석 오류 교정 | 위험 상위 10% 부도율 26.48%, 전체 대비 Lift 3.28배 |
-| 2 | [서울시 공공자전거 수요 예측](https://github.com/jujinho03/seoul-bike-demand-forecasting) | 대용량 데이터 품질, GPS 군집, 시계열 검증 | LightGBM Macro RMSE 190.724, SARIMA 대비 58.595% 개선 |
-| 3 | [KOSPI 거시경제 허위회귀 검증](https://github.com/jujinho03/kospi-macro-spurious-regression) | 정상성·공적분 진단, HAC 추론, 홀드아웃 | Durbin–Watson 0.2611 → 2.0102, 수준 OLS 해석을 1차 차분으로 교정 |
+### 1. [Home Credit — 신용리스크 분석](https://github.com/jujinho03/home-credit-default-risk)
 
-각 프로젝트 README의 **프로젝트 한눈에 보기**, **나의 역할과 재구축 범위**, **핵심 주장과 검증 경로**에서 원과제와 개인 재구축의 경계, 주요 결과와 공개 증거를 바로 확인할 수 있습니다.
+불균형 대출 데이터에서 고위험 신청자를 구분했습니다. 팀 과제에서 데이터 품질·누수 방지와 모델 검증을 맡고, 이후 개인 재구축에서 변수 중요도 해석 오류를 발견해 재검증했습니다.
 
-## 분석 원칙
+층화 홀드아웃에서 위험 상위 10% 집단의 실제 부도율은 **26.48%, 전체 대비 3.28배**였습니다. 미래 시점 성과나 손실 감소를 뜻하지 않습니다. [분석 보고서와 검증 과정](https://github.com/jujinho03/home-credit-default-risk/blob/c753352f588a20c7f484e25eeb16c61a72364ef6/docs/findings.md)
 
-- 모델보다 먼저 원본 행 수, 결측·중복·이상값과 집계 전후 보존을 확인합니다.
-- 전처리와 검증을 분리하고, 시계열에서는 시간 순서를 보존합니다.
-- 복잡한 모델은 단순 기준선과 같은 평가 구간에서 비교합니다.
-- 핵심 수치는 CSV·그림·노트북으로 다시 확인할 수 있게 연결합니다.
-- 높은 성능보다 해석 가능한 범위와 한계를 함께 기록합니다.
+### 2. [KOSPI — 금융 시계열과 허위회귀 진단](https://github.com/jujinho03/kospi-macro-spurious-regression)
+
+높은 R²를 보인 수준 회귀에서 정상성·공적분·잔차를 점검해 해석을 제한했습니다. 팀 과제의 데이터 검증과 시계열 진단을 바탕으로 분석을 개인 재구축했습니다.
+
+1차 차분 모형은 금융 변수 변화의 **단기 동시점 연관성**으로 해석했습니다. 인과관계나 검증된 투자 예측은 아닙니다. [진단 결과와 분석 보고서](https://github.com/jujinho03/kospi-macro-spurious-regression/blob/ddd4f114fa9fcc9087138b0dbb3f8b20b5ab5cde/docs/findings.md)
+
+### 3. [서울시 공공자전거 — 시계열 수요 예측](https://github.com/jujinho03/seoul-bike-demand-forecasting)
+
+6인 팀 과제에서 이상치 기준 합의와 전처리를 담당했고, 이후 개인적으로 GPS 3개 군집과 시간 순서 기반 검증을 재구축했습니다.
+
+2024년 4분기 동일 테스트 구간에서 LightGBM의 **Macro RMSE는 SARIMA보다 58.6% 낮았습니다.** 결과는 군집별 다음 1시간 수요의 예측 오차입니다. [분석 보고서와 모델 비교](https://github.com/jujinho03/seoul-bike-demand-forecasting/blob/acc34adfef41548cd36f3e52ae1397494c40390c/docs/findings.md)
+
+### 4. [VeriMod — AI 판정 기록의 무결성 검증](https://github.com/jujinho03/verimod)
+
+BLOCK AI 2026 HTTP 451 팀 프로젝트에서 팀장으로 AI 데이터 분할·누수 점검, R01 평가와 오분류 분석을 담당했습니다.
+
+팀은 사용자가 받은 판정 영수증과 공개 테스트넷의 등록값을 대조하는 프로토타입을 만들었습니다. 이는 AI 판정 자체가 옳음을 증명하지 않습니다. [AI 평가·한계: Model Card](https://github.com/jujinho03/verimod/blob/3e1d97b18ec4d1e0d96d0f951e154d8b3b138c74/docs/model-card.md)
+
+## 분석 도구
+
+Python · pandas · scikit-learn · LightGBM · Jupyter
