@@ -1,12 +1,14 @@
 # 보험펜(BohumPen) — 청구지원 AI 평가
 
-[프로필로 돌아가기](../README.md) · [팀 저장소](https://github.com/k0ng-min/2026_finance_ai_challenge) · [내 기여](#contribution) · [평가](#evaluation) · [실패 사례](#failure)
+[프로필로 돌아가기](https://github.com/jujinho03) · [팀 저장소](https://github.com/k0ng-min/2026_finance_ai_challenge) · [내 기여](#contribution) · [평가](#evaluation) · [실패 사례](#failure)
+
+검사 조건은 정보가 부족한 사고의 판단 보류, 담보·필수서류 연결, 인용 문자열의 원문 포함 여부임. TRV-018에서는 세부 유형을 보류해야 할 수하물 사고에 지연 담보·필수서류를 반환했음. 반환된 인용 2건은 원문에 포함됐지만, 이 사례는 전체 허용 기준을 충족하지 못했음. 아래 결과는 저장된 분류 예측을 재사용한 합성 개발 평가이며 실제 고객·지급 성능의 근거가 아님.
 
 ## 문제와 서비스 범위
 
 여행자보험 사고가 발생하면 어떤 담보와 서류를 검토해야 하는지, 그 근거가 약관 어디에 있는지 찾기 어려움. 보험펜은 사고 설명에서 검토할 담보·서류와 약관 조항을 연결해 청구 준비와 약관 검토를 지원함. 보험금 지급 여부를 판정하거나 지급액을 산정하지 않음. 실제 화면의 ‘보험형광펜’은 같은 서비스임.
 
-2026 금융 AI Challenge 팀 프로젝트. 팀명 FinPoint, 팀장 주진호, 제출 완료는 본인 확인 기준. 아래 공개 기록의 범위는 서비스 구현과 개발 평가이며, 수상·순위·심사 결과는 별도 기재하지 않음.
+2026 금융 AI Challenge의 FinPoint 4인 팀이 MVP를 구현·제출한 프로젝트. 팀장 주진호, 제출 완료는 본인 확인 기준. 아래 공개 기록의 범위는 서비스 구현과 개발 평가이며, 수상·순위·심사 결과는 별도 기재하지 않음.
 
 <a id="contribution"></a>
 
@@ -24,7 +26,7 @@
 | 사고·담보 분리와 불확실성 처리 | 팀 | [청구지원 구현](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/app/services/claim_review.py), [후속 질문 변경](https://github.com/k0ng-min/2026_finance_ai_challenge/commit/6862ccc5b68bef6020448ee6fb1cd64e1e34c1cc) |
 | 결정적 순위 계산과 AI 설명 분리 | 팀 | [순위 방법론](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/docs/ranking_methodology.md), [계산 코드](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/app/services/ranking_score.py) |
 
-팀 구현은 사고 유형과 담보를 구분해 약관 조항과 필요 서류를 연결함. 사고 유형이 불명확하면 추가 질문을 하거나 판단을 보류함. [6862ccc](https://github.com/k0ng-min/2026_finance_ai_challenge/commit/6862ccc5b68bef6020448ee6fb1cd64e1e34c1cc)에서는 답변 보존·중복 질문 방지·질문 종료 처리를 확인했음. 이 후속 질문 전체 구현은 팀 성과로 표기함.
+팀 구현은 사고 유형과 담보를 구분해 약관 조항과 필요 서류를 연결함. 사고 유형이 불명확할 때 추가 질문하거나 판단을 보류하는 처리를 포함함. [6862ccc](https://github.com/k0ng-min/2026_finance_ai_challenge/commit/6862ccc5b68bef6020448ee6fb1cd64e1e34c1cc)에서는 답변 보존·중복 질문 방지·질문 종료 처리를 확인했음. 이 후속 질문 전체 구현은 팀 성과로 표기함.
 
 보험사 순위는 결정적 로직으로 계산하고 Gemini는 이유를 설명함. 데이터가 없는 평가 축은 제외하고 남은 가중치를 재정규화하므로, 순위를 절대적 상품 품질이나 지급 가능성으로 읽을 수 없음. [방법론](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/docs/ranking_methodology.md) · [설명 생성 코드](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/app/services/insurer_ranking_explain_gemini.py)
 
@@ -32,7 +34,7 @@
 
 ## 평가 설계와 결과
 
-합성 청구지원 시나리오 40건 중 37건(92.5%)이 허용 기준을 충족했음. 수치는 [저장된 평가 JSON](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/eval/results/claim_pipeline_eval.json)의 시나리오별 `evaluation.acceptable`과 집계 지표를 기준으로 함.
+합성 청구지원 시나리오 40건 중 37건(92.5%)이 `evaluation.acceptable`의 복합 허용 기준을 통과했음. 수치는 [저장된 평가 JSON](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/eval/results/claim_pipeline_eval.json)의 시나리오별 판정과 집계 지표를 기준으로 함.
 
 - 표본 — 기존 분류기 검수 문장에서 구성한 합성 시나리오임. 실제 고객 데이터가 아님. 사고 분류와 담보·서류 연결, 인용 근거 및 미지원 사고의 처리까지 함께 평가함.
 - 실행 경로 — `routing_mode=cached-classifier-predictions`임. 저장된 분류 모델 예측을 재사용하고 현재의 결정적 안전 처리를 적용한 개발 평가임. 이번 포트폴리오 편집에서 외부 API를 새로 호출해 측정한 결과가 아님.
@@ -66,11 +68,17 @@ python -m eval.evaluate_claim_pipeline --live-classifier --request-interval 4.2 
 
 ## 실패 사례와 한계
 
-저장 결과의 TRV-018은 “수하물이 아직 없지만 늦는 것인지 영구 분실인지 모릅니다.”라는 합성 입력임. 정답은 세부 유형을 보류하도록 정의됐지만, 실제 출력은 수하물 지연(`TRV_BAGGAGE_DELAY`)으로 단정해 지연 관련 담보(`FLIGHT_DELAY`)와 서류를 추가했음. 이 사례는 허용 기준을 충족하지 못했음. [시나리오·기대값·실제값](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/eval/results/claim_pipeline_eval.json)
+TRV-018의 합성 입력은 “수하물이 아직 없지만 늦는 것인지 영구 분실인지 모릅니다.”임.
 
-이때 반환한 인용은 원문 문자열 검사에 통과했음. 따라서 원문을 정확하게 인용하는 것과 사고에 맞는 조항을 고르는 것은 별개의 검증임. 인용 일치율만 보고 서비스를 안전하다고 결론 내리지 않고, 모호한 사고의 판단 보류와 담보·서류의 과잉 연결을 별도로 확인해야 함.
+- 기대 — 수하물 지연·영구 분실 중 세부 유형을 보류하고 특정 담보·필수서류를 제시하지 않는 것.
+- 저장된 실제 — 수하물 지연(`TRV_BAGGAGE_DELAY`)으로 분류해 `FLIGHT_DELAY` 담보와 필수서류를 반환했음.
+- 판정 — 반환된 인용 2건은 원문에 포함됐지만, 이 사례는 전체 허용 기준을 충족하지 못했음.
 
-후속 검증은 지연·분실의 경계 사례에서 추가 질문이 필요한 조건을 구체화하는 데 초점을 둠. 개발에 사용하지 않은 시나리오와 실제 운영 환경에서의 성능은 미검증.
+[시나리오·기대값·실제값](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/eval/results/claim_pipeline_eval.json)
+
+원문을 정확하게 인용하는 것과 사고에 맞는 조항을 고르는 것은 별개의 검증임. 인용 일치율만 보고 서비스를 안전하다고 결론 내리지 않고, 모호한 사고의 판단 보류와 담보·서류의 과잉 연결을 별도로 확인해야 함.
+
+개선 과제는 정보가 부족할 때 추가 질문하거나 판단을 보류하는 조건을 검증하는 것임. 해당 실패의 수정·재검증 성공은 확인하지 못했으며, 개발에 사용하지 않은 시나리오와 실제 운영 환경에서의 성능도 미검증.
 
 <a id="evidence"></a>
 
@@ -82,4 +90,4 @@ python -m eval.evaluate_claim_pipeline --live-classifier --request-interval 4.2 
 - [평가 설계](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/docs/evaluation.md) · [골드셋](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/data/eval/claim_pipeline_gold.jsonl) · [저장된 결과](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/eval/results/claim_pipeline_eval.json) · [평가 코드](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/backend/eval/evaluate_claim_pipeline.py)
 - [데이터 현황](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/docs/data_status.md) · [순위 방법론](https://github.com/k0ng-min/2026_finance_ai_challenge/blob/984b23ba887103b9f9d8b31f7e821eb0037e4024/docs/ranking_methodology.md)
 
-팀 원본 코드·DB·약관 PDF·제출 문서는 이 저장소에 복제하지 않았음. 공개 근거 링크와 새로 작성한 설명만으로 개인 기여와 평가 범위를 제시함. 배포 주소는 비로그인 접속 시 서비스 중단(Service Suspended) 안내를 표시해 라이브 데모 링크를 싣지 않았음.
+팀 원본 코드·DB·약관 PDF·제출 문서는 이 저장소에 복제하지 않았음. 공개 근거 링크와 새로 작성한 설명만으로 개인 기여와 평가 범위를 제시함. 배포 주소는 기존 확인 기록상 비로그인 접속 시 서비스 중단(Service Suspended) 안내를 표시했음. 이번 검토에서는 현재 배포 상태를 재확인하지 못해 라이브 데모 링크를 싣지 않았음.
