@@ -56,7 +56,7 @@ A/U(전업 수험·합격 후 수습 미확보)는 2027년 10월에 안전자금
 
 ## 재현과 공개 근거
 
-핵심 수치·코드 링크는 확인한 프로젝트 기본 브랜치 커밋 `c78d4f2`에 고정했음. 아래 실행 경로는 공개 저장소를 준비한 뒤 사용하는 것이며, 이번 프로필 편집에서 전체 계산·감사를 새로 실행했다는 뜻은 아님.
+핵심 수치·코드 링크는 확인한 프로젝트 기본 브랜치 커밋 `c78d4f2`에 고정했음. 2026년 11월 21일 Windows의 별도 작업본에서 `python scripts/reproduce.py`를 실행해 기본 결과(`model_summary.json`), 월별 현금흐름(`monthly_cashflows.csv`), 민감도(`sensitivity.json`)를 다시 생성했음. 세 파일 모두 저장본과 바이트 단위로 일치했음. 아래 두 번째 명령은 AI 주장에 대한 별도 감사 절차임.
 
 - [프로젝트 README][readme] · [기본 결과 JSON][summary] · [민감도 JSON][sensitivity]
 - [Python 모형][model] · [재현·실행 안내][reproduce] · [AI 감사 안내][audit]

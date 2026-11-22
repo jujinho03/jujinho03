@@ -1,6 +1,6 @@
 # 보험펜(BohumPen) — 청구지원 AI 평가
 
-[프로필로 돌아가기](https://github.com/jujinho03) · [팀 저장소](https://github.com/k0ng-min/2026_finance_ai_challenge) · [내 기여](#contribution) · [평가](#evaluation) · [실패 사례](#failure)
+[프로필로 돌아가기](../README.md) · [팀 저장소](https://github.com/k0ng-min/2026_finance_ai_challenge) · [내 기여](#contribution) · [평가](#evaluation) · [실패 사례](#failure)
 
 검사 조건은 정보가 부족한 사고의 판단 보류, 담보·필수서류 연결, 인용 문자열의 원문 포함 여부임. TRV-018에서는 세부 유형을 보류해야 할 수하물 사고에 지연 담보·필수서류를 반환했음. 반환된 인용 2건은 원문에 포함됐지만, 이 사례는 전체 허용 기준을 충족하지 못했음. 아래 결과는 저장된 분류 예측을 재사용한 합성 개발 평가이며 실제 고객·지급 성능의 근거가 아님.
 
